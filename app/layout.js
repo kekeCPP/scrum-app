@@ -2,7 +2,6 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/themeprovider";
-import { ModeToggle } from "@/components/themeswith";
 import NavBar from "@/components/header";
 
 export const metadata = {
@@ -29,11 +28,7 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
 
-          <header className="border-b p-2">
-            <NavBar />
-          </header>
-
-          <div className="p-2">
+          <div>
             {children}
           </div>
 
