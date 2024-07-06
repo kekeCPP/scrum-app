@@ -12,6 +12,15 @@ import { Home } from "lucide-react"
 import { Settings } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation";
+import {
+	Sheet,
+	SheetContent,
+	SheetDescription,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from "@/components/ui/sheet"
+
 
 
 export default function NavBar() {
@@ -30,13 +39,13 @@ export default function NavBar() {
 				</NavigationMenuItem>
 
 
-				<NavigationMenuItem>
+				{/* <NavigationMenuItem>
 					<Button asChild
 						variant={location === "/projects" ? "secondary" : "ghost"}
 					>
 						<Link href="/projects">Projects</Link>
 					</Button>
-				</NavigationMenuItem>
+				</NavigationMenuItem> */}
 
 
 				<NavigationMenuItem>
@@ -72,13 +81,25 @@ export default function NavBar() {
 			<NavigationMenuList>
 
 				<NavigationMenuItem>
-					<Button variant="outline" size="icon">
-						<Settings />
-					</Button>
+					<ModeToggle />
 				</NavigationMenuItem>
 
 				<NavigationMenuItem>
-					<ModeToggle />
+					<Sheet>
+						<SheetTrigger asChild>
+							<Button variant="outline" size="icon">
+								<Settings />
+							</Button>
+						</SheetTrigger>
+						<SheetContent>
+							<SheetHeader>
+								<SheetTitle>Settings</SheetTitle>
+								<SheetDescription>
+									Wow! There's really a lot of settings here...
+								</SheetDescription>
+							</SheetHeader>
+						</SheetContent>
+					</Sheet>
 				</NavigationMenuItem>
 
 			</NavigationMenuList>

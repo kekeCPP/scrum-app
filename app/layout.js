@@ -2,7 +2,8 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/themeprovider";
-import NavBar from "@/components/header";
+import { Toaster } from "@/components/ui/toaster";
+import { CookiesProvider } from "next-client-cookies/server";
 
 export const metadata = {
   title: "Create Next App",
@@ -27,10 +28,12 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-
-          <div>
-            {children}
-          </div>
+          <CookiesProvider>
+            <div>
+              {children}
+              <Toaster />
+            </div>
+          </CookiesProvider>
 
         </ThemeProvider>
       </body>
