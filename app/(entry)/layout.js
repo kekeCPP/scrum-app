@@ -1,5 +1,6 @@
 "use client";
 import NavBar from "@/components/header";
+import SideBar from "@/components/sidebar";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
 
@@ -25,13 +26,17 @@ export default function RootLayout({ children }) {
 	})
 
 	return (
-		<div>
-			<header className="border-b p-2">
-				<NavBar />
-			</header>
-
-			<div className="pt-2 pr-4 pl-4 pb-2">
-				{children}
+		<div className="flex flex-row">
+			<div>
+				<SideBar />
+			</div>
+			<div className="w-full">
+				<header className="border-b p-2">
+					<NavBar />
+				</header>
+				<div className="pt-2 pr-4 pl-4 pb-2 flex flex-row">
+					{children}
+				</div>
 			</div>
 		</div>
 	);

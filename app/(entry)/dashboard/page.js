@@ -1,4 +1,4 @@
-export default function ProjectsHomeView() {
+export default function DashboardView() {
 	return (
 		<div>
 			Hello from dashboard

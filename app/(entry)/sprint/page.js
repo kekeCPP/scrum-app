@@ -1,4 +1,4 @@
-export default function ProjectsHomeView() {
+export default function SprintView() {
 	return (
 		<div>
 			Hello from sprint

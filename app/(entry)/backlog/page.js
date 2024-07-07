@@ -1,4 +1,4 @@
-export default function ProjectsHomeView() {
+export default function BacklogView() {
 	return (
 		<div>
 			<div className="flex flex-row">

@@ -20,7 +20,118 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet"
+import { useState } from "react";
+import { Check, ChevronsUpDown } from "lucide-react"
+import { cn } from "@/lib/utils"
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+} from "@/components/ui/command"
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover"
 
+const activeProjects = [
+	{
+		value: "project a",
+		label: "project a"
+	},
+	{
+		value: "project b",
+		label: "project b"
+	}
+]
+
+const completedProjects = [
+	{
+		value: "project c",
+		label: "project c"
+	},
+	{
+		value: "project d",
+		label: "project d"
+	}
+]
+
+function ComboboxDemo() {
+	const [open, setOpen] = useState(false)
+	const [value, setValue] = useState("")
+
+	return (
+		<Popover open={open} onOpenChange={setOpen}>
+			<PopoverTrigger asChild>
+				<Button
+					variant="outline"
+					role="combobox"
+					aria-expanded={open}
+					className="w-[200px] justify-between"
+				>
+					{value
+						? activeProjects.concat(completedProjects).find((project) => project.value === value)?.label
+						: "Select project..."}
+					<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+				</Button>
+			</PopoverTrigger>
+			<PopoverContent className="w-[200px] p-0">
+				<Command>
+					<CommandInput placeholder="Search projects..." />
+					<CommandEmpty>No projects found.</CommandEmpty>
+					<CommandList>
+						<CommandGroup>
+							<span className="font-semibold text-sm pl-2">Active Projects</span>
+							{activeProjects.map((project) => (
+								<CommandItem
+									key={project.value}
+									value={project.value}
+									onSelect={(currentValue) => {
+										setValue(currentValue === value ? "" : currentValue)
+										setOpen(false)
+									}}
+								>
+									<Check
+										className={cn(
+											"mr-2 h-4 w-4",
+											value === project.value ? "opacity-100" : "opacity-0"
+										)}
+									/>
+									{project.label}
+								</CommandItem>
+							))}
+						</CommandGroup>
+
+						<CommandGroup>
+							<span className="font-semibold text-sm pl-2">Completed Projects</span>
+							{completedProjects.map((project) => (
+								<CommandItem
+									key={project.value}
+									value={project.value}
+									onSelect={(currentValue) => {
+										setValue(currentValue === value ? "" : currentValue)
+										setOpen(false)
+									}}
+								>
+									<Check
+										className={cn(
+											"mr-2 h-4 w-4",
+											value === project.value ? "opacity-100" : "opacity-0"
+										)}
+									/>
+									{project.label}
+								</CommandItem>
+							))}
+						</CommandGroup>
+					</CommandList>
+				</Command>
+			</PopoverContent>
+		</Popover >
+	)
+}
 
 
 export default function NavBar() {
@@ -34,9 +145,24 @@ export default function NavBar() {
 
 				<NavigationMenuItem>
 					<Button variant="ghost" size="icon" asChild>
-						<Link href="/"><Home /></Link>
+						<Link href="/projects"><Home /></Link>
 					</Button>
 				</NavigationMenuItem>
+
+				<span className="text-xl">Backlog - AI Utilization Environment</span>
+
+				{/* <NavigationMenuItem>
+					<ComboboxDemo />
+				</NavigationMenuItem> */}
+
+				{/* <NavigationMenuItem>
+					<Button asChild
+						variant={location === "/backlog" ? "secondary" : "ghost"}
+					>
+						<Link href="/backlog">My Projects</Link>
+					</Button>
+					<Link href="/projects">My Projects</Link>
+				</NavigationMenuItem> */}
 
 
 				{/* <NavigationMenuItem>
@@ -48,7 +174,7 @@ export default function NavBar() {
 				</NavigationMenuItem> */}
 
 
-				<NavigationMenuItem>
+				{/* <NavigationMenuItem>
 					<Button asChild
 						variant={location === "/backlog" ? "secondary" : "ghost"}
 					>
@@ -72,7 +198,7 @@ export default function NavBar() {
 					>
 						<Link href="/dashboard">Dashboard</Link>
 					</Button>
-				</NavigationMenuItem>
+				</NavigationMenuItem> */}
 
 			</NavigationMenuList>
 
